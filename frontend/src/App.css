@@ -33,6 +33,26 @@
   font-style: italic;
 }
 
+.backend-status {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.status-healthy {
+  color: #4ade80;
+  font-weight: bold;
+}
+
+.status-checking {
+  color: #fbbf24;
+}
+
+.status-disconnected {
+  color: #f87171;
+  font-weight: bold;
+}
+
 .main-content {
   flex: 1;
   display: flex;

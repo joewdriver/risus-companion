@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import CharacterCreation from './pages/CharacterCreation'
 import CharacterList from './pages/CharacterList'
@@ -5,10 +6,29 @@ import CharacterDetail from './pages/CharacterDetail'
 import CampaignCreation from './pages/CampaignCreation'
 import CampaignList from './pages/CampaignList'
 import CampaignDetail from './pages/CampaignDetail'
+import { apiEndpoints } from './config/api'
 import './App.css'
 
 function HomePage() {
+  const [backendStatus, setBackendStatus] = useState<string>('checking...');
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const checkBackendHealth = async () => {
+      try {
+        const response = await fetch(apiEndpoints.health);
+        if (response.ok) {
+          const data = await response.json();
+          setBackendStatus(data.status);
+        }
+      } catch (error) {
+        console.error('Failed to connect to backend:', error);
+        setBackendStatus('disconnected');
+      }
+    };
+
+    checkBackendHealth();
+  }, []);
 
   const handleCreateCharacter = () => {
     navigate('/character')
@@ -31,6 +51,9 @@ function HomePage() {
       <header className="app-header">
         <h1 className="title">Risus</h1>
         <p className="subtitle">The Anything RPG Companion</p>
+        <div className="backend-status">
+          Backend Status: <span className={`status-${backendStatus}`}>{backendStatus}</span>
+        </div>
       </header>
       
       <main className="main-content">
