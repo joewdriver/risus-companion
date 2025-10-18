@@ -67,7 +67,7 @@ const CampaignDetail: React.FC = () => {
   const fetchCampaign = async (campaignId: number) => {
     try {
       setLoading(true)
-      const res = await fetch(`apiEndpoints.campaign}?id=${campaignId}`)
+      const res = await fetch(`${apiEndpoints.campaign}?id=${campaignId}`)
       if (!res.ok) {
         if (res.status === 404) throw new Error('Campaign not found')
         throw new Error('Failed to load campaign')
