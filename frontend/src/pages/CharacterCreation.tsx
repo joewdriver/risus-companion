@@ -96,7 +96,8 @@ const CharacterCreation: React.FC = () => {
         <p>Build your character with clichés and dice</p>
       </header>
 
-      <form onSubmit={handleSubmit} className="character-form">
+      <div className="character-content">
+        <form onSubmit={handleSubmit} className="character-form">
         <div className="form-section">
           <h2>Basic Information</h2>
           
@@ -194,6 +195,39 @@ const CharacterCreation: React.FC = () => {
           </button>
         </div>
       </form>
+
+        <div className="character-guide">
+          <h2>🎲 How to Create a Risus Character</h2>
+          <div className="guide-content">
+            <ul className="guide-list">
+              <li><strong>Name your character</strong> - Give them a memorable name that fits your setting</li>
+              <li><strong>Choose 3-4 Clichés</strong> - These define what your character is good at:
+                <ul className="sub-list">
+                  <li>Examples: "Grizzled Space Marine", "Sneaky Thief", "Mad Scientist"</li>
+                  <li>Make them broad rather than narrow for more versatility</li>
+                  <li>Avoid overlapping skills - each Cliché should cover different situations</li>
+                </ul>
+              </li>
+              <li><strong>Distribute 10 dice</strong> among your Clichés:
+                <ul className="sub-list">
+                  <li>Each Cliché must have at least 1 die (minimum 1, maximum 6)</li>
+                  <li>More dice = better at that type of activity</li>
+                  <li>A focused character might have one Cliché at [6] dice</li>
+                  <li>A balanced character might spread dice more evenly</li>
+                </ul>
+              </li>
+              <li><strong>Add a Hook</strong> (optional) - A character flaw or complication:
+                <ul className="sub-list">
+                  <li>Gets you +1 extra die to spend (11 total instead of 10)</li>
+                  <li>Examples: "Afraid of heights", "Compulsive liar", "Haunted by past"</li>
+                  <li>Should create interesting roleplaying opportunities</li>
+                </ul>
+              </li>
+              <li><strong>Write a description</strong> - Flesh out your character's personality and background</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

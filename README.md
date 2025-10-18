@@ -105,7 +105,39 @@ Characters in Risus are defined by **Clichés** - stereotypical character types,
 ```bash
 cd frontend
 npm install
+
+# Default development server (connects to localhost:5000 API)
 npm run dev
+
+# Specify custom frontend port
+npm run dev -- --port 3000
+
+# Specify custom API connection
+# Linux/Mac:
+VITE_API_PORT=5100 npm run dev -- --port 3000
+# Windows PowerShell:
+$env:VITE_API_PORT="5100"; npm run dev -- --port 3000
+
+# For remote API server (HTTPS production)
+# Linux/Mac:
+VITE_API_HOST=risus.potter.sh VITE_API_PROTOCOL=https npm run dev -- --port 3000
+# Windows PowerShell:
+$env:VITE_API_HOST="risus.potter.sh"; $env:VITE_API_PROTOCOL="https"; npm run dev -- --port 3000
+
+# For remote API server (custom port)
+# Linux/Mac:
+VITE_API_HOST=serverpotter.sh VITE_API_PORT=5100 npm run dev -- --port 3000
+# Windows PowerShell:
+$env:VITE_API_HOST="serverpotter.sh"; $env:VITE_API_PORT="5100"; npm run dev -- --port 3000
+
+# Use convenience scripts
+# Production HTTPS:
+./start-frontend.sh risus.potter.sh 443 3000 https
+start-frontend.bat risus.potter.sh 443 3000 https
+
+# Development with custom port:
+./start-frontend.sh serverpotter.sh 5100 3000 http
+start-frontend.bat serverpotter.sh 5100 3000 http
 ```
 
 ### Backend Setup
@@ -114,7 +146,12 @@ cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 pip install -r requirements.txt
+
+# Default port (5000)
 flask run
+
+# Custom port with external access
+flask run --port 5100 --host 0.0.0.0
 ```
 
 ## API Documentation

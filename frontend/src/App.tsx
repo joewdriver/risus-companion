@@ -6,6 +6,7 @@ import CharacterDetail from './pages/CharacterDetail'
 import CampaignCreation from './pages/CampaignCreation'
 import CampaignList from './pages/CampaignList'
 import CampaignDetail from './pages/CampaignDetail'
+import Rules from './pages/Rules'
 import { apiEndpoints } from './config/api'
 import './App.css'
 
@@ -44,6 +45,14 @@ function HomePage() {
 
   const handleCharacterList = () => {
     navigate('/characters')
+  }
+
+  const handleRules = () => {
+    navigate('/rules')
+  }
+
+  const handleResources = () => {
+    window.open('https://www.risusiverse.com/', '_blank')
   }
 
   return (
@@ -91,6 +100,21 @@ function HomePage() {
             className="main-image"
           />
         </div>
+        
+        <div className="hero-action">
+          <button 
+            className="rules-button" 
+            onClick={handleRules}
+          >
+            📖 Rules
+          </button>
+          <button 
+            className="resources-button" 
+            onClick={handleResources}
+          >
+            🌐 Resources
+          </button>
+        </div>
       </main>
     </div>
   )
@@ -107,6 +131,7 @@ function App() {
         <Route path="/campaign" element={<CampaignCreation />} />
         <Route path="/campaigns" element={<CampaignList />} />
         <Route path="/campaigns/:id" element={<CampaignDetail />} />
+        <Route path="/rules" element={<Rules />} />
       </Routes>
     </Router>
   )
