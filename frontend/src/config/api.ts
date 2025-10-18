@@ -4,13 +4,19 @@ const API_PORT = import.meta.env.VITE_API_PORT || '5000';
 const API_PROTOCOL = import.meta.env.VITE_API_PROTOCOL || 'http';
 const API_BASE_PATH = import.meta.env.VITE_API_BASE_PATH || '/api';
 
-// Build the base URL - handle both localhost and production cases
+// Check if we're in production mode (built/deployed)
+const IS_PRODUCTION = import.meta.env.PROD;
+
+// Build the base URL - handle development vs production
 let API_BASE_URL: string;
-if (API_HOST === 'localhost' || API_HOST === '127.0.0.1') {
+if (IS_PRODUCTION) {
+  // Production build - use relative path (will use same host as frontend)
+  API_BASE_URL = API_BASE_PATH;
+} else if (API_HOST === 'localhost' || API_HOST === '127.0.0.1') {
   // Local development
   API_BASE_URL = `${API_PROTOCOL}://${API_HOST}:${API_PORT}${API_BASE_PATH}`;
 } else {
-  // Production - assume standard HTTPS port (443) and custom path
+  // Development but connecting to remote server
   API_BASE_URL = `${API_PROTOCOL}://${API_HOST}${API_BASE_PATH}`;
 }
 
