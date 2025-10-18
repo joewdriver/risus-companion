@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CampaignList.css'
+import { apiEndpoints } from '../config/api'
 
 interface Character {
   id: number
@@ -48,7 +49,7 @@ const CampaignList: React.FC = () => {
   const fetchCampaigns = async () => {
     try {
       setLoading(true)
-      const response = await fetch('apiEndpoints.campaigns')
+      const response = await fetch(apiEndpoints.campaigns)
       
       if (!response.ok) {
         throw new Error('Failed to fetch campaigns')
