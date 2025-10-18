@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import './CampaignDetail.css'
+import { apiEndpoints } from '../config/api'
 
 interface Character {
   id: number
@@ -66,7 +67,7 @@ const CampaignDetail: React.FC = () => {
   const fetchCampaign = async (campaignId: number) => {
     try {
       setLoading(true)
-      const res = await fetch(`http://127.0.0.1:5000/api/campaign?id=${campaignId}`)
+      const res = await fetch(`apiEndpoints.campaign}?id=${campaignId}`)
       if (!res.ok) {
         if (res.status === 404) throw new Error('Campaign not found')
         throw new Error('Failed to load campaign')
@@ -84,7 +85,7 @@ const CampaignDetail: React.FC = () => {
 
   const fetchAllCharacters = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/characters')
+      const res = await fetch(apiEndpoints.characters)
       if (!res.ok) throw new Error('Failed to load characters')
       const data = await res.json()
       const chars = (data.characters || []).map((c: any) => ({ id: c.id, name: c.name }))
@@ -152,7 +153,7 @@ const CampaignDetail: React.FC = () => {
     try {
       setSubmittingSession(true)
       setActionError(null)
-      const res = await fetch(`http://127.0.0.1:5000/api/campaigns/${campaign.id}/sessions`, {
+      const res = await fetch(apiEndpoints.campaignSessions(campaign.id), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -205,7 +206,7 @@ const CampaignDetail: React.FC = () => {
     try {
       setSavingEdit(true)
       setActionError(null)
-      const res = await fetch(`http://127.0.0.1:5000/api/sessions/${editingSession.id}`, {
+      const res = await fetch(apiEndpoints.session(editingSession.id), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -235,7 +236,7 @@ const CampaignDetail: React.FC = () => {
     try {
       setAddingId(charId)
       setActionError(null)
-      const res = await fetch(`http://127.0.0.1:5000/api/campaigns/${campaign.id}/characters`, {
+      const res = await fetch(apiEndpoints.campaignCharacters(campaign.id), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ character_id: charId })
@@ -259,7 +260,7 @@ const CampaignDetail: React.FC = () => {
     try {
       setRemovingId(charId)
       setActionError(null)
-      const res = await fetch(`http://127.0.0.1:5000/api/campaigns/${campaign.id}/characters/${charId}`, {
+      const res = await fetch(apiEndpoints.campaignCharacter(campaign.id, charId), {
         method: 'DELETE'
       })
       if (!res.ok) {

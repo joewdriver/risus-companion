@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { apiEndpoints } from '../config/api'
 import './CharacterList.css'
 
 interface Cliche {
@@ -50,7 +51,7 @@ const CharacterList: React.FC = () => {
   const fetchCharacters = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://127.0.0.1:5000/api/characters')
+      const response = await fetch(apiEndpoints.characters)
       
       if (!response.ok) {
         throw new Error('Failed to fetch characters')

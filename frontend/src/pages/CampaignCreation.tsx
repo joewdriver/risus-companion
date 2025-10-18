@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CampaignCreation.css'
+import { apiEndpoints } from '../config/api'
 
 interface Character {
   id: number
@@ -31,8 +32,8 @@ const CampaignCreation: React.FC = () => {
   const fetchCharacters = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://127.0.0.1:5000/api/characters')
-      
+      const response = await fetch(apiEndpoints.characters)
+
       if (!response.ok) {
         throw new Error('Failed to fetch characters')
       }
@@ -79,7 +80,7 @@ const CampaignCreation: React.FC = () => {
         character_ids: selectedCharacters.map(char => char.id)
       }
 
-      const response = await fetch('http://127.0.0.1:5000/api/campaigns', {
+      const response = await fetch(apiEndpoints.campaigns, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

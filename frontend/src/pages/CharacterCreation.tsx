@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CharacterCreation.css'
+import { apiEndpoints } from '../config/api'
 
 interface Cliche {
   name: string
@@ -64,7 +65,7 @@ const CharacterCreation: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/characters', {
+      const response = await fetch(apiEndpoints.characters, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

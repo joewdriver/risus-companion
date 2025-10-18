@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import './CharacterDetail.css'
+import { apiEndpoints } from '../config/api'
 
 interface Cliche {
   id: number
@@ -54,7 +55,7 @@ const CharacterDetail: React.FC = () => {
   const fetchCharacter = async (characterId: number) => {
     try {
       setLoading(true)
-      const response = await fetch(`http://127.0.0.1:5000/api/characters/${characterId}`)
+      const response = await fetch(`apiEndpoints.character(characterId)`)
       
       if (!response.ok) {
         if (response.status === 404) {
@@ -127,7 +128,7 @@ const CharacterDetail: React.FC = () => {
         cliches: allCliches
       }
 
-      const response = await fetch(`http://127.0.0.1:5000/api/characters/${character.id}`, {
+      const response = await fetch(apiEndpoints.character(character.id), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
