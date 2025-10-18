@@ -55,7 +55,7 @@ const CharacterDetail: React.FC = () => {
   const fetchCharacter = async (characterId: number) => {
     try {
       setLoading(true)
-      const response = await fetch(`apiEndpoints.character(characterId)`)
+      const response = await fetch(apiEndpoints.character(characterId))
       
       if (!response.ok) {
         if (response.status === 404) {
